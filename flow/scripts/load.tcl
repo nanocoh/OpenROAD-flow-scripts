@@ -17,7 +17,6 @@ proc load_design { design_file sdc_file } {
         read_lef $lef
       }
     }
-<<<<<<< HEAD
     # Uncomment the following line to read the design file in Verilog
     #read_verilog $::env(RESULTS_DIR)/$design_file
     # Comment the following lines to read the design file in Verilog
@@ -27,12 +26,6 @@ proc load_design { design_file sdc_file } {
     log_cmd link_design {*}[hier_options] $::env(DESIGN_NAME)
   } elseif {$ext == ".odb"} {
     log_cmd read_db {*}[hier_options] $::env(RESULTS_DIR)/$design_file
-=======
-    read_verilog $::env(RESULTS_DIR)/$design_file
-    log_cmd link_design {*}[hier_options] $::env(DESIGN_NAME)
-  } elseif { $ext == ".odb" } {
-    log_cmd read_db {*}[hier_options] $::env(RESULTS_DIR)/$design_file
->>>>>>> b2d224758b1fae76777c5fc5a3493c6bd769404c
   } else {
     error "Unrecognized input file $design_file"
   }
