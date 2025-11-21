@@ -24,9 +24,9 @@ proc load_design { design_file sdc_file } {
     read_naja_if_interface $::env(RESULTS_DIR)/../../../../snl/db_interface.snl
     read_naja_if_implementation $::env(RESULTS_DIR)/../../../../snl/db_implementation.snl
 
-    link_design $::env(DESIGN_NAME)
+    log_cmd link_design {*}[hier_options] $::env(DESIGN_NAME)
   } elseif {$ext == ".odb"} {
-    read_db $::env(RESULTS_DIR)/$design_file
+    log_cmd read_db {*}[hier_options] $::env(RESULTS_DIR)/$design_file
 =======
     read_verilog $::env(RESULTS_DIR)/$design_file
     log_cmd link_design {*}[hier_options] $::env(DESIGN_NAME)
