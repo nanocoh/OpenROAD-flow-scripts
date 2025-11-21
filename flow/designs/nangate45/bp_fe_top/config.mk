@@ -29,3 +29,7 @@ export PLACE_DENSITY_MAX_POST_HOLD = 0.13
 export TNS_END_PERCENT        = 100
 
 export FASTROUTE_TCL = $(DESIGN_HOME)/$(PLATFORM)/$(DESIGN_NAME)/fastroute.tcl
+
+export GPL_KEEP_OVERFLOW = 0
+
+export HOLD_SLACK_MARGIN = 0.03

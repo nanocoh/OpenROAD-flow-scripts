@@ -76,7 +76,7 @@ def extractTagFromFile(
     count=False,
     occurrence=-1,
     defaultNotFound="N/A",
-    t=str,
+    t=float,
     required=True,
 ):
     if jsonTag in jsonFile:
@@ -102,7 +102,7 @@ def extractTagFromFile(
                 value = parsedMetrics[occurrence]
                 value = value.strip()
                 try:
-                    jsonFile[jsonTag] = float(value)
+                    jsonFile[jsonTag] = t(value)
                 except BaseException:
                     jsonFile[jsonTag] = str(value)
         else:
@@ -231,10 +231,11 @@ def extract_metrics(
     # Synthesis
     # =========================================================================
 
+    # The new format (>= 0.57) is: <count> <area> cells
     extractTagFromFile(
         "synth__design__instance__count__stdcell",
         metrics_dict,
-        "Number of cells: +(\\S+)",
+        "^\\s+(\\d+)\\s+[-0-9.]+\\s+cells$",
         rptPath + "/synth_stat.txt",
     )
 
@@ -288,7 +289,7 @@ def extract_metrics(
     # Accumulate time
     # =========================================================================
 
-    extractGnuTime("synth", metrics_dict, logPath + "/1_1_yosys.log")
+    extractGnuTime("synth", metrics_dict, logPath + "/1_2_yosys.log")
     extractGnuTime("floorplan", metrics_dict, logPath + "/2_1_floorplan.log")
     extractGnuTime("floorplan_io", metrics_dict, logPath + "/2_2_floorplan_io.log")
     extractGnuTime(
